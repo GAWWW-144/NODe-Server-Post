@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>글 수정</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/nav.css">
+</head>
+<body>
+    <%- include('../partials/nav', { title: '글 수정', user: user }) %>
+    <div class="container">
+        <h2>글 수정하기</h2>
+        <form action="/posts/edit/<%= post.post_id %>" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+            <div class="form-group">
+                <label>게시판:</label>
+                <select name="type" style="padding: 5px;">
+                    <option value="free" <%= (typeof post !== 'undefined' && post.type==='free') || type==='free' ? 'selected' : '' %>>자유게시판</option>
+    
+                     <% if (user.email === 'admin@example.com') { %>
+                         <option value="notice" <%= (typeof post !== 'undefined' && post.type==='notice') || type==='notice' ? 'selected' : '' %>>공지사항</option>
+                     <% } %>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" name="title" value="<%= post.title %>" required style="width: 100%; padding: 10px;">
+            </div>
+            <div class="form-group">
+                <textarea name="content" rows="15" required style="width: 100%; padding: 10px;"><%= post.content %></textarea>
+            </div>
+            <div>
+                <button type="submit" class="button">수정 완료</button>
+                <a href="/posts/view/<%= post.post_id %>" class="button" style="background-color: #aaa;">취소</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

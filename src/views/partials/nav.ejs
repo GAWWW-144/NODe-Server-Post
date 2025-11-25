@@ -3,7 +3,7 @@
         <%= title %>
     </div>
     <ul class="menu">
-        <li><a href="/todos" class="<%= title === 'Todo List' ? 'active' : '' %>">TODO 관리</a></li>
+        <li><a href="/posts" class="<%= typeof title !== 'undefined' && (title.includes('게시판') || title.includes('공지')) ? 'active' : '' %>">게시판</a></li>
         <% if (user && user.email === 'admin@example.com') { %>
             <li><a href="/admin" class="<%= title === 'Admin - User Management' ? 'active' : '' %>">사용자관리</a></li>
         <% } %>

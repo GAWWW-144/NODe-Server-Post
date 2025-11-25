@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/nav.css">
+</head>
+<body>
+    <%- include('../partials/nav', { title: title, user: user }) %>
+
+    <div class="container">
+        <h2 class="page-title"><%= title %></h2>
+
+        <div class="post-header">
+            <div>
+                <a href="/posts?type=free" 
+                   class="button <%= type === 'free' ? 'active' : '' %>">자유게시판</a>
+
+                <a href="/posts?type=notice" 
+                   class="button <%= type === 'notice' ? 'active' : '' %>">공지사항</a>
+            </div>
+
+            <form action="/posts" method="GET" class="search-form">
+                <input type="hidden" name="type" value="<%= type %>">
+                <input type="text" name="search" placeholder="제목 검색" value="<%= search %>">
+                <button type="submit">검색</button>
+            </form>
+        </div>
+
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th style="width: 10%">번호</th>
+                    <th style="width: 50%">제목</th>
+                    <th style="width: 15%">작성자</th>
+                    <th style="width: 10%">조회수</th>
+                    <th style="width: 15%">등록일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (posts.length > 0) { %>
+                    <% posts.forEach(post => { %>
+                    <tr>
+                        <td><%= post.post_id %></td>
+                        <td><a href="/posts/view/<%= post.post_id %>"><%= post.title %></a></td>
+                        <td><%= post.user_name %></td>
+                        <td><%= post.view_count %></td>
+                        <td><%= post.created_at.toISOString().slice(0,10) %></td>
+                    </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="5" style="text-align:center;">게시글이 없습니다.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+
+        <div class="write-btn">
+            <a href="/posts/write?type=<%= type %>" class="button">글쓰기</a>
+        </div>
+
+        <div class="pagination">
+            <% for (let i = 1; i <= totalPages; i++) { %>
+                <a href="/posts?page=<%= i %>&type=<%= type %>&search=<%= search %>"
+                   class="<%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

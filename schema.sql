@@ -32,7 +32,7 @@ INSERT INTO users (email, user_name, password) VALUES ('admin@example.com', 'Adm
 -- Insert regular users
 INSERT INTO users (email, user_name, password) VALUES ('user1@example.com', 'Test User One', 'password');
 INSERT INTO users (email, user_name, password) VALUES ('user2@example.com', 'Test User Two', 'password');
-
+INSERT INTO users (email, user_name, password) VALUES ('1234@example.com', '1234', '1234');
 -- Insert todos for user1@example.com (user_id = 2)
 INSERT INTO todos (user_id, title) VALUES (2, 'Buy groceries');
 INSERT INTO todos (user_id, title, is_completed) VALUES (2, 'Finish project report', TRUE);

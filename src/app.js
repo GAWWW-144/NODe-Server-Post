@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 
+
 const app = express();
 const port = 3000;
 
@@ -11,6 +12,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Middleware
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
@@ -21,12 +23,12 @@ app.use(session({
 
 // Routes
 const indexRouter = require('./routes/index');
-const todosRouter = require('./routes/todos');
+const postsRouter = require('./routes/posts');
 const adminRouter = require('./routes/admin');
 const testRouter = require('./routes/test');
 
 app.use('/', indexRouter);
-app.use('/todos', todosRouter);
+app.use('/posts', postsRouter);
 app.use('/admin', adminRouter);
 app.use('/test', testRouter);
 

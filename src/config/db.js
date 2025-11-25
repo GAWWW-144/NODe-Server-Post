@@ -2,8 +2,8 @@ const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'todouser', // TODO: Change to your database username
-  password: 'todopass', // TODO: Change to your database password
+  user: 'root', // TODO: Change to your database username
+  password: 'rootroot', // TODO: Change to your database password
   database: 'tododb'
 });
 

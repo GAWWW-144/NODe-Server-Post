@@ -26,7 +26,7 @@ router.post('/login', (req, res) => {
             if (user.email === 'admin@example.com') {
                 res.redirect('/admin');
             } else {
-                res.redirect('/todos');
+                res.redirect('/posts');
             }
         } else {
             res.render('login', { error: 'Invalid email or password' });
@@ -54,7 +54,7 @@ router.post('/signup', (req, res) => {
 router.get('/logout', (req, res) => {
     req.session.destroy(err => {
         if (err) {
-            return res.redirect('/todos'); // Or handle error appropriately
+            return res.redirect('/posts'); // Or handle error appropriately
         }
         res.clearCookie('connect.sid'); // Cookie name may vary
         res.redirect('/');
